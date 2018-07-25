@@ -87,15 +87,31 @@ void print(stack_t **top) {
     printf("\b\b\b   \n");
 }
 
+void copyStack(stack_t **topNew,stack_t **topOld) {
+
+    node_t *node;
+
+    stack_t *st_temp = NULL;
+
+    for(node = *topOld;node != NULL; node = node->next){
+        push(&st_temp,node->value);
+    }
+    while (!is_empty(&st_temp)){
+        push(topNew,top(&st_temp));
+        pop(&st_temp);
+    }
+}
+
 
 void solution1();
 void solution2();
-
+void solution3();
 
 int main() {
 
     //solution1();
-    solution2();
+    //solution2();
+    solution3();
 
     return 0;
 }
@@ -181,5 +197,27 @@ void solution2() {
     }
 
     printf("Правильная последовательность скобок!\n");
+
+}
+
+void solution3(){
+
+    stack_t *st = NULL;
+    int value = 0;
+    printf("Введит число: \n");
+    scanf("%d",&value);
+
+    while (value!=0){
+        push(&st,value%2);
+        value/=2;
+    }
+
+    printf("Двоичное представление числа: \n");
+    print(&st);
+
+    stack_t *stCopy = NULL;
+    copyStack(&stCopy,&st);
+
+    print(&stCopy);
 
 }
