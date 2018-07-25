@@ -89,11 +89,13 @@ void print(stack_t **top) {
 
 
 void solution1();
+void solution2();
 
 
 int main() {
 
-    solution1();
+    //solution1();
+    solution2();
 
     return 0;
 }
@@ -113,5 +115,9 @@ void solution1(){
 
     printf("Двоичное представление числа: \n");
     print(&st);
+
+}
+
+void solution2() {
 
 }
