@@ -106,7 +106,12 @@ void solution1(){
     printf("Введит число: \n");
     scanf("%d",&value);
 
+    while (value!=0){
+        push(&st,value%2);
+        value/=2;
+    }
 
-
+    printf("Двоичное представление числа: \n");
+    print(&st);
 
 }
