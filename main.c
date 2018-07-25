@@ -101,6 +101,12 @@ int main() {
 void solution1(){
 
 //    1. Реализовать перевод из 10 в 2 систему счисления с использованием стека.
+    stack_t *st = NULL;
+    int value = 0;
+    printf("Введит число: \n");
+    scanf("%d",&value);
+
+
 
 
 }
