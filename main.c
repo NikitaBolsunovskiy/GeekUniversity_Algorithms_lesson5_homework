@@ -210,13 +210,15 @@ void solution1();
 void solution2();
 void solution3();
 void solution4();
+void solution5();
 
 int main() {
 
     //solution1();
     //solution2();
     //solution3();
-    solution4();
+    //solution4();
+    solution5();
 
     return 0;
 }
@@ -341,5 +343,13 @@ void solution4(){
 
     infixToPostfix(&infixStr,&postsixStr);
     printf("Постфиксная строка: %s", postsixStr);
+
+}
+
+void solution5(){
+    //6. *Реализовать очередь.
+
+    int i;
+
 
 }
