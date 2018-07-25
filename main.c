@@ -87,19 +87,23 @@ void print(stack_t **top) {
     printf("\b\b\b   \n");
 }
 
-void copyStack(stack_t **topNew,stack_t **topOld) {
+stack_t* copyStack(stack_t **topOld) {
 
     node_t *node;
 
     stack_t *st_temp = NULL;
+    stack_t *st = NULL;
 
     for(node = *topOld;node != NULL; node = node->next){
         push(&st_temp,node->value);
     }
-    while (!is_empty(&st_temp)){
-        push(topNew,top(&st_temp));
+
+    while(!is_empty(&st_temp)){
+        push(&st,top(&st_temp));
         pop(&st_temp);
     }
+
+    return st;
 }
 
 
@@ -215,9 +219,9 @@ void solution3(){
     printf("Двоичное представление числа: \n");
     print(&st);
 
-    stack_t *stCopy = NULL;
-    copyStack(&stCopy,&st);
 
+    stack_t *stCopy = copyStack(&st);
+    printf("Скопированный список: \n");
     print(&stCopy);
 
 }
