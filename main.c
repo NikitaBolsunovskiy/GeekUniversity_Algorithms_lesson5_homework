@@ -212,6 +212,7 @@ void solution2();
 void solution3();
 void solution4();
 void solution5();
+void solution6();
 
 int main() {
 
@@ -219,7 +220,8 @@ int main() {
     //solution2();
     //solution3();
     //solution4();
-    solution5();
+    //solution5();
+    solution6();
 
     return 0;
 }
@@ -402,8 +404,10 @@ void list_push(list_t *lt, int data){
     node->next = lt->head;
 
     lt->head = node;
+    if (lt->tail==NULL){
+        lt->tail = lt->head;
+    }
     lt->size++;
-
 }
 
 int list_pop(list_t *lt) {
@@ -419,6 +423,30 @@ int list_pop(list_t *lt) {
     if(lt->size == 0){
         lt->head = NULL;
         lt->tail = NULL;
+    }
+    return ret_val;
+}
+
+int list_pop_back(list_t *lt) {
+    if(lt->size == 0){
+        return NULL;
+    }
+    list_node_t *node = lt->tail;
+    int ret_val = node->data;
+    lt->size -= 1;
+    free(node);
+
+
+    if(lt->size == 0){
+        lt->head = NULL;
+        lt->tail = NULL;
+    } else {
+        node = lt->head;
+        while(node->next->next!=NULL){
+            node=node->next;
+        }
+        lt->tail = node;
+        node->next = NULL;
     }
     return ret_val;
 }
@@ -470,5 +498,23 @@ void solution5(){
     }
 
 
+
+}
+
+void solution6(){
+//    6. ***Реализовать двустороннюю очередь.
+
+    // двусторонняя очередь на списке...
+    list_t * queue = createList();
+
+    list_push(queue,2);
+    list_push(queue,3);
+    list_push_back(queue,-1);
+    list_push_back(queue,-2);
+    list_pop_back(queue);
+    list_pop_back(queue);
+
+    printf("Первый элемент очереди:%d\n",queue->head->data);
+    printf("последний элемент очереди:%d\n",queue->tail->data);
 
 }
