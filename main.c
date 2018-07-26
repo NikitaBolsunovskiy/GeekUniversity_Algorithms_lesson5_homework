@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+
 /* Описание структуры стек.
  * typedef задает синоним для типа данных,
  * В языке Си, если не использовать typedef приходится каждый раз добавлять слово
@@ -346,12 +347,27 @@ void solution4(){
 
 }
 
+typedef struct arrayQueue{
+    int rear;
+    int front;
+    int que[100];
+} arrayQueue_t;
+
+void initArrayQueue(arrayQueue_t * queue){
+    queue->rear=0;
+    queue->front=0;
+    for (int i = 0; i < 100; ++i) {
+        queue->que[i]=0;
+    }
+}
 
 void solution5(){
 //    5. Реализовать очередь:
 //    1. С использованием массива.
 //    2. *С использованием односвязного списка.
 
+    arrayQueue_t * q1 = NULL;
+    initArrayQueue(q1);
 
 
 
