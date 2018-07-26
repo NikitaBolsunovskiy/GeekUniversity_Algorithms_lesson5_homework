@@ -361,13 +361,113 @@ void initArrayQueue(arrayQueue_t * queue){
     }
 }
 
+void pushRear(arrayQueue_t * queue, int value){
+    queue->que[queue->rear] = value;
+    queue->rear++;
+}
+
+void popFront(arrayQueue_t * queue){
+    queue->que[queue->front] = 0;
+    queue->front++;
+}
+
+void printArrayQueue(arrayQueue_t * queue){
+    for (int i = queue->front; i < queue->rear; ++i) {
+        printf("%d\n",queue->que[i]);
+    }
+}
+
+typedef struct list_node{
+    struct list_node *next;
+    int data;
+} list_node_t;
+
+typedef struct list {
+    int size;
+    list_node_t * head;
+    list_node_t * tail;
+}list_t;
+
+list_t* createList(){
+    list_t *lt = malloc(sizeof(list_t));
+    lt->size = 0;
+    lt->head = NULL;
+    lt->tail = lt->head;
+}
+
+void list_push(list_t *lt, int data){
+
+    list_node_t *node = malloc(sizeof(list_node_t));
+    node->data = data;
+    node->next = lt->head;
+
+    lt->head = node;
+    lt->size++;
+
+}
+
+int list_pop(list_t *lt) {
+    if(lt->size == 0){
+        return NULL;
+    }
+    list_node_t *node = lt->head;
+    int ret_val = node->data;
+    lt->size -= 1;
+    lt->head = node->next;
+    free(node);
+
+    if(lt->size == 0){
+        lt->head = NULL;
+        lt->tail = NULL;
+    }
+    return ret_val;
+}
+
+void list_push_back(list_t *lt, int data){
+    list_node_t * node = malloc(sizeof(list_node_t));
+    node->data = data;
+    if(lt->tail != NULL)
+        lt->tail->next = node;
+    else {
+        lt->head = node;
+    }
+
+    lt->tail = node;
+    lt->size += 1;
+}
+
 void solution5(){
 //    5. Реализовать очередь:
 //    1. С использованием массива.
 //    2. *С использованием односвязного списка.
 
-    arrayQueue_t * q1 = NULL;
+
+    // Очередь на массиве...
+    arrayQueue_t * q1 = malloc(sizeof(arrayQueue_t));
     initArrayQueue(q1);
+
+    for (int i = 0; i < 10; ++i) {
+        pushRear(q1,i);
+    }
+
+    for (int i = 0; i < 5; ++i) {
+        popFront(q1);
+    }
+
+    printf("Очередь после операций:\n");
+    printArrayQueue(q1);
+
+    // Очередь на списке...
+    list_t * queue = createList();
+
+    for (int j = 0; j < 10; ++j) {
+        printf("Встает в очередь: %d\n",j);
+        list_push_back(queue,j);
+    }
+
+    for (int k = 0; k < 5; ++k) {
+        printf("Выходит из очередт: %d\n",list_pop(queue));
+    }
 
 
 
